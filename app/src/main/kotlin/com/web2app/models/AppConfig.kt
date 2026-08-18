@@ -45,8 +45,8 @@ data class AppConfig(
     val onboardingImageShape: Int = 0,
     /** Loader shown while web pages load inside the WebView. */
     val pageLoader: PageLoader = PageLoader(),
-    /** Swipe-down-to-refresh gesture on the WebView (enabled by default). */
-    val pullRefresh: Boolean = true
+    /** Swipe-down-to-refresh gesture on the WebView (off by default). */
+    val pullRefresh: Boolean = false
 )
 
 data class PageLoader(
@@ -224,7 +224,7 @@ fun parseAppConfig(json: JSONObject): AppConfig {
         onboardingCardColor = json.optString("onboardingCardColor", "#FFFFFF"),
         onboardingImageShape = json.optInt("onboardingImageShape", 0),
         pageLoader = pageLoader,
-        pullRefresh = json.optBoolean("pullRefresh", true)
+        pullRefresh = json.optBoolean("pullRefresh", false)
     )
 }
 
