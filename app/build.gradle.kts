@@ -24,7 +24,7 @@ android {
 
     defaultConfig {
         applicationId = cfgPackage
-        minSdk = 21
+        minSdk = 24
         targetSdk = 36
         versionCode = cfgVersionCode
         versionName = cfgVersionName
