@@ -85,6 +85,8 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.swiperefreshlayout)
+    // Document-start script for WebFiles (print, file downloads, share).
+    implementation(libs.androidx.webkit)
 
     // Push notifications (OneSignal). FCM credentials live in the OneSignal
     // dashboard, so no google-services.json is needed in the app. Only activated

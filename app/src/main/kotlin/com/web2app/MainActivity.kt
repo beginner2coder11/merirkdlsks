@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private var useCustomPageLoader = false
 
     private lateinit var permissionsHandler: PermissionsHandler
+    private lateinit var webFiles: WebFiles
 
     /** Pending WebView file-input callback; must be invoked exactly once per chooser. */
     private var fileUploadCallback: ValueCallback<Array<Uri>>? = null
@@ -180,6 +181,10 @@ class MainActivity : AppCompatActivity() {
                 "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
         }
 
+        // window.print, <a download> of blob:/data: files, navigator.share and
+        // window.open(blobUrl) — none of which a bare WebView supports.
+        webFiles = WebFiles(this, webView).also { it.install() }
+
         // Enable cookies (including third-party) – mirrors reference Webview.kt
         CookieManager.getInstance().apply {
             setAcceptCookie(true)
@@ -205,6 +210,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
                 showLoading(true)
+                webFiles.onPageStarted()
             }
 
             override fun onPageFinished(view: WebView, url: String) {
